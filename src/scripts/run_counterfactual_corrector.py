@@ -39,7 +39,7 @@ def main() -> None:
     base_model.split_data()
     base_model.load_model("src/output/entropy_lgbm_model.pkl")
 
-    y_pred = base_model.model.predict(base_model.X_test)
+    _, y_pred_proba = base_model.predict(base_model.X_test)
 
     ps = []
     neigh_ps = []
@@ -50,7 +50,7 @@ def main() -> None:
         sim, ids, probs = store.search_neighbors(emb, calibrated_probs)
         sims_arr.append(sim)
         neigh_ps.append(probs)
-        ps.append(y_pred[i])
+        ps.append(y_pred_proba[i])
 
     ps = np.array(ps)
     neigh_ps = np.array(neigh_ps)

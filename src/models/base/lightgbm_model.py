@@ -32,7 +32,12 @@ class LightGBMConfig(BaseModel):
 
 
 class LightGBMClassifierModel:
-    def __init__(self, ds_feats: pd.DataFrame, ds_embs: np.ndarray, config: LightGBMConfig | None = None):
+    def __init__(
+        self, 
+        ds_feats: pd.DataFrame | None = None, 
+        ds_embs: np.ndarray | None = None, 
+        config: LightGBMConfig | None = None
+    ):
         self.config = config or LightGBMConfig()
         self.X = ds_feats[self.config.feature_cols]
         self.y = ds_feats[self.config.target_col]
