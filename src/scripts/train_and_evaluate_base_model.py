@@ -9,8 +9,8 @@ import json
 import torch
 import pandas as pd
 from models.base.lightgbm_model import LightGBMClassifierModel
-from sklearn.linear_model import LogisticRegression
 import numpy as np
+from utils.analysis import platt_scaled_predictions
 
 FEATURES_PATH = "src/data/patch_entropy.csv"
 EMBEDDINGS_PATH = "src/data/patch_embeddings.pt"
@@ -20,7 +20,7 @@ RESULT_SAVE_PATH = "src/output/base_result.json"
 
 # For analysis
 OOF_PROBS_SAVE_PATH = "src/output/oof_probs.npy"
-TEMP_SCALED_PROBS_SAVE_PATH = "src/output/temp_scaled_probs.npy"
+PLATT_SCALED_PROBS_SAVE_PATH = "src/output/platt_scaled_probs.npy"
 
 def main():
     print(f"Loading features from: {FEATURES_PATH}")
@@ -64,18 +64,10 @@ def main():
         np.save(OOF_PROBS_SAVE_PATH, oof_probs)
         print(f"Saved out-of-fold predictions to: {OOF_PROBS_SAVE_PATH}")
 
-    logit_probs = np.log(oof_probs / (1 - oof_probs))  # logit transform
-    temp_model = LogisticRegression(fit_intercept=False)
-    temp_model.fit(logit_probs.reshape(-1,1), model.y_train)
-
-    # Adjusted probabilities
-    logit_probs_test = np.log(oof_probs / (1 - oof_probs))
-
-    scaled_probs = 1 / (1 + np.exp(-temp_model.coef_[0][0] * logit_probs_test))
-    if TEMP_SCALED_PROBS_SAVE_PATH:
-        np.save(TEMP_SCALED_PROBS_SAVE_PATH, scaled_probs)
-        print(f"Saved temp-scaled predictions to: {TEMP_SCALED_PROBS_SAVE_PATH}")
-
+    calibrated_probs = platt_scaled_predictions(oof_probs, model.y_train)
+    if PLATT_SCALED_PROBS_SAVE_PATH:
+        np.save(PLATT_SCALED_PROBS_SAVE_PATH, calibrated_probs)
+        print(f"Saved platt scaled predictions to: {PLATT_SCALED_PROBS_SAVE_PATH}")
 
 if __name__ == "__main__":
     main()
