@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, roc_auc_score, confusion_matrix
 
 def platt_scaled_predictions(origin_probs: np.ndarray, true_labels: np.ndarray) -> np.ndarray:
     """
@@ -26,3 +27,19 @@ def platt_scaled_predictions(origin_probs: np.ndarray, true_labels: np.ndarray) 
     # Predict calibrated probabilities
     calibrated_probs = platt.predict_proba(logits)[:, 1]
     return calibrated_probs
+
+def evaluate(pred: np.ndarray, proba: np.ndarray, ground_truth: np.ndarray) -> dict:
+    report = classification_report(ground_truth, pred, output_dict=True)
+    # Convert any NumPy types in the report to native Python types
+    report = {k: {kk: (float(vv) if isinstance(vv, (np.float32, np.float64)) else vv)
+                for kk, vv in v.items()} if isinstance(v, dict) else v
+            for k, v in report.items()}
+
+    auc = float(roc_auc_score(ground_truth, proba))
+    cm = confusion_matrix(ground_truth, pred).tolist()
+
+    return {
+        "classification_report": report,
+        "roc_auc": auc,
+        "confusion_matrix": cm
+    }

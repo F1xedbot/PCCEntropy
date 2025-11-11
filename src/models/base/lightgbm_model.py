@@ -1,6 +1,5 @@
 from lightgbm import LGBMClassifier, early_stopping, log_evaluation
 from sklearn.model_selection import train_test_split, KFold
-from sklearn.metrics import classification_report, roc_auc_score, confusion_matrix
 from pydantic import BaseModel
 import pandas as pd
 import numpy as np
@@ -69,25 +68,11 @@ class LightGBMClassifierModel:
             ]
         )
 
-    def evaluate(self) -> dict:
-        """Evaluate the model on the test set."""
-        y_pred = self.model.predict(self.X_test)
-        y_proba = self.model.predict_proba(self.X_test)[:, 1]
-
-        report = classification_report(self.y_test, y_pred, output_dict=True)
-        # Convert any NumPy types in the report to native Python types
-        report = {k: {kk: (float(vv) if isinstance(vv, (np.float32, np.float64)) else vv)
-                    for kk, vv in v.items()} if isinstance(v, dict) else v
-                for k, v in report.items()}
-
-        auc = float(roc_auc_score(self.y_test, y_proba))
-        cm = confusion_matrix(self.y_test, y_pred).tolist()
-
-        return {
-            "classification_report": report,
-            "roc_auc": auc,
-            "confusion_matrix": cm
-        }
+    def predict(self, test_set: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Predict on the a set."""
+        y_pred = self.model.predict(test_set)
+        y_proba = self.model.predict_proba(test_set)[:, 1]
+        return y_pred, y_proba
 
     def save_model(self, path: str) -> None:
         """Save trained LightGBM model to disk."""
@@ -98,6 +83,10 @@ class LightGBMClassifierModel:
         """Save train/test embeddings separately."""
         os.makedirs(os.path.dirname(path), exist_ok=True)
         np.savez_compressed(path, train=self.emb_train, test=self.emb_test)
+
+    def load_model(self, path: str) -> None:
+        """Loads a pre-trained model from a joblib file."""
+        self.model = joblib.load(path)
 
     def oof_predict(self, n_splits: int | None = None, random_state: int | None = None) -> np.ndarray:
         """
