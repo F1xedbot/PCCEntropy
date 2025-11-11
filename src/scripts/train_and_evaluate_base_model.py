@@ -10,7 +10,7 @@ import torch
 import pandas as pd
 from models.base.lightgbm_model import LightGBMClassifierModel
 import numpy as np
-from utils.analysis import platt_scaled_predictions
+from utils.analysis import platt_scaled_predictions, evaluate
 
 FEATURES_PATH = "src/data/patch_entropy.csv"
 EMBEDDINGS_PATH = "src/data/patch_embeddings.pt"
@@ -39,7 +39,8 @@ def main():
     model.fit()
 
     print("Evaluating model...")
-    results = model.evaluate()
+    y_pred, y_proba = model.predict(model.X_test)
+    results = evaluate(y_pred, y_proba, model.y_test)
     print(json.dumps(results, indent=2))
 
     if RESULT_SAVE_PATH:
