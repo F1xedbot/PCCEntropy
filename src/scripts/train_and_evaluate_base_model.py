@@ -20,7 +20,8 @@ RESULT_SAVE_PATH = "src/output/base_result.json"
 
 # For analysis
 OOF_PROBS_SAVE_PATH = "src/output/oof_probs.npy"
-TEMP_SCALED_PROBS_SAVE_PATH = "src/output/temp_scaled_probs.npy" 
+TEMP_SCALED_PROBS_SAVE_PATH = "src/output/temp_scaled_probs.npy"
+GROUND_TRUTH_PROBS = "src/output/ground_truth_probs.npy"
 
 
 def main():
@@ -56,6 +57,11 @@ def main():
     if EMBEDDINGS_SAVE_PATH:
         model.save_embeddings(EMBEDDINGS_SAVE_PATH)
         print(f"Saved train/test embeddings to: {EMBEDDINGS_SAVE_PATH}")
+
+
+    if GROUND_TRUTH_PROBS:
+        np.save(GROUND_TRUTH_PROBS, model.y_train)
+        print(f"Saved ground truth predictions to: {GROUND_TRUTH_PROBS}")
 
     # Get OOF Predictions and Temp Scaled Predictions for later analysis
     # Fit a single-parameter logistic (temperature) on a validation set
