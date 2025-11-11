@@ -11,7 +11,7 @@ from models.encoder import LMEncoder
 from utils.enums import LMModels
 
 # ----------------- CONFIG ----------------- #
-DATA_PATH = ""
+DATA_PATH = "" # <-- edit this
 TARGET_FILES = ["data_code.pkl"]
 EMBEDDINGS_SAVE_PATH = "../data/patch_train_embeddings.pt"
 ENTROPY_SAVE_PATH = "../data/patch_train_entropy.csv"
