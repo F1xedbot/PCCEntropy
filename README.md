@@ -1,6 +1,6 @@
 # Entropy-Guided Framework for Code Patch Validation
 
-This repository presents a case study exploring a multi-layered approach to evaluating the correctness and reliability ofx` code patches.
+This repository presents a case study exploring a multi-layered approach to evaluating the correctness and reliability of code patches.
 The goal is to analyze how different validation layers—ranging from statistical models to large language models (LLMs), can be combined to balance accuracy, certainty, and cost efficiency.
 
 ---
@@ -67,3 +67,4 @@ PCCEntropy/
 │
 └── TECHNICAL_APPENDIX.md  # Detailed definitions and mathematical derivations
 ```
+
