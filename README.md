@@ -3,13 +3,9 @@
 This repository presents a case study exploring a multi-layered approach to evaluating the correctness and reliability of code patches.
 The goal is to analyze how different validation layers—ranging from statistical models to large language models (LLMs), can be combined to balance accuracy, certainty, and cost efficiency.
 
----
-
 ## Problem Overview
 Modern automated program repair systems often generate plausible code patches that compile successfully but remain functionally incorrect.
 This leads to a bottleneck where developers must manually review numerous low-quality suggestions.
-
----
 
 ## Framework Overview
 The study investigates a three-layer reliability framework that combines lightweight statistical modeling with LLM-based semantic validation.
@@ -67,4 +63,5 @@ PCCEntropy/
 │
 └── TECHNICAL_APPENDIX.md  # Detailed definitions and mathematical derivations
 ```
+
 
