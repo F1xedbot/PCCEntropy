@@ -4,7 +4,7 @@ This leads to a bottleneck where developers must manually review numerous low-qu
 
 This repository explores a case study on a lightweight, multi-layered approach for code patch validation.
 The framework combines simple entropy analysis from a language model with statistical methods to predict patch correctness efficiently.
-On a held-out test set of 1,988 samples, the framework consistently achieves 98.8% ROC-AUC, with potential peaks up to 99.8% when the final LLM layer performs optimally.
+On a held-out test set of 1,988 samples, the framework consistently achieves **98.8%** ROC-AUC, with potential peaks up to **99.8%** when the final LLM layer performs optimally.
 The LLM component introduces some variability, but overall results remain stable and competitive compared to more complex empirical methods.
 
 ---
@@ -34,11 +34,6 @@ Uses a large language model to perform a final semantic check on the patch, impr
 
 ---
 
-Perfect — here’s a refined version with visual spacing and subtler caption styling.
-This version uses inline HTML for better Markdown rendering (works well in docs, slides, and GitHub):
-
----
-
 ## Results Summary
 
 Evaluation shows that integrating structured reliability metrics with a targeted LLM review layer significantly boosts precision and calibration — without depending fully on LLM-based evaluation.
@@ -51,12 +46,14 @@ Nonetheless, the pipeline remains stably accurate at 98.8%.
 | ----- | -------------------------- | --------- | ------------------------------------------------------------------- |
 | 1     | Baseline GBDT              | **0.973** | 92% accuracy on held-out data                                       |
 | 2     | Counterfactual Reliability | **0.988** | 29% relative error reduction, better calibration                    |
-| 3     | LLM-Gate Review            | **⬆0.99** | Recovered ~65% of remaining FP/FN, applied only to 12.4% of samples |
+| 3     | LLM-Gate Review            | **~0.99** | Recovered ~65% of remaining FP/FN, applied only to 12.4% of samples |
 
 <div align="center" style="margin-top: 30px; margin-bottom: 10px;">
   <img src="/assets/cm_base.png" alt="Baseline Confusion Matrix" width="44%" style="margin-right: 3%;" />
   <img src="/assets/cm_corrective.png" alt="Corrective Confusion Matrix" width="44%" />
 </div>
+
+</div> <p align="center" style="font-size: 0.85em; color: #555; margin-top: 5px;"> <b>Figure:</b> Baseline (left) vs. corrective (right) confusion matrices. </p>
 
 ---
 
