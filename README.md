@@ -34,9 +34,14 @@ Uses a large language model to perform a final semantic check on the patch, impr
 
 ---
 
+Perfect — here’s a refined version with visual spacing and subtler caption styling.
+This version uses inline HTML for better Markdown rendering (works well in docs, slides, and GitHub):
+
+---
+
 ## Results Summary
 
-Our evaluation shows that integrating structured reliability metrics with a targeted LLM review layer significantly boosts precision and calibration — without depending fully on LLM-based evaluation.
+Evaluation shows that integrating structured reliability metrics with a targeted LLM review layer significantly boosts precision and calibration — without depending fully on LLM-based evaluation.
 
 With **1,988 test samples**, the system achieved a **fixed ROC-AUC of 0.988 (98.8%)**, verified on held-out data.
 While the LLM layer can occasionally push the ROC-AUC up to **99.8%**, this improvement is not guaranteed due to the model’s non-deterministic behavior.
@@ -46,14 +51,13 @@ Nonetheless, the pipeline remains stably accurate at 98.8%.
 | ----- | -------------------------- | --------- | ------------------------------------------------------------------- |
 | 1     | Baseline GBDT              | **0.973** | 92% accuracy on held-out data                                       |
 | 2     | Counterfactual Reliability | **0.988** | 29% relative error reduction, better calibration                    |
-| 3     | LLM-Gate Review            | —         | Recovered ~65% of remaining FP/FN, applied only to 12.4% of total samples |
+| 3     | LLM-Gate Review            | **⬆0.99** | Recovered ~65% of remaining FP/FN, applied only to 12.4% of samples |
 
-<p align="center">
-  <img src="/assets/cm_base.png" alt="Baseline Confusion Matrix" width="45%"/>
-  <img src="/assets/cm_corrective.png" alt="Corrective Confusion Matrix" width="45%"/>
-</p>
+<div align="center" style="margin-top: 30px; margin-bottom: 10px;">
+  <img src="/assets/cm_base.png" alt="Baseline Confusion Matrix" width="44%" style="margin-right: 3%;" />
+  <img src="/assets/cm_corrective.png" alt="Corrective Confusion Matrix" width="44%" />
+</div>
 
-**Figure:** Comparison of baseline (left) and corrective (right) confusion matrices.
 ---
 
 ## Repository Structure
@@ -61,11 +65,11 @@ Nonetheless, the pipeline remains stably accurate at 98.8%.
 ```
 PCCEntropy/
 │
-├── assets/                # Images and diagrams used in the README
+├── assets/                # Plots
 ├── data/                  # Sample data
 ├── notebooks/             # Jupyter notebooks for analysis and experiments
-├── src/                   # Source code for feature extraction and validation pipeline
-│
+├── src/                   # Source code for the framework
+├── USAGE.md               # How to setup and use this repo
 └── TECHNICAL_APPENDIX.md  # Detailed definitions and mathematical derivations
 ```
 
