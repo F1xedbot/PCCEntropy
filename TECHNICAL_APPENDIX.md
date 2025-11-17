@@ -576,32 +576,32 @@ This adjustment rule operationalizes the safeguard principle in an enriched form
 #### 4.3.5 Examples
 
 * **Stable case:**
-  If $p = 0.82$, $SS = 0.92$, $CP = 0.11$, $\alpha = 0.7$:
+If $p = 0.82$, $SS = 0.92$, $CP = 0.11$, $\alpha = 0.7$:
 
-  ```math
+  $$
   FI = 0.7 \cdot (1 - 0.92) + 0.3 \cdot 0.11 = 0.056.
-  ```
+  $$
 
   With $NM = 0.80$:
 
-  ```math
+  $$
   p' = (1 - 0.056)\cdot 0.82 + 0.056 \cdot 0.80 = 0.819.
-  ```
+  $$
 
   Adjustment is negligible—stability preserved.
 
 * **Fragile case:**
 If $p = 0.82$, $SS = 0.35$, $CP = 0.62$, $\alpha = 0.7$:
 
-   ```math
-   FI = 0.7 \cdot (1 - 0.35) + 0.3 \cdot 0.62 = 0.609.
-   ```
+  $$
+  FI = 0.7 \cdot (1 - 0.35) + 0.3 \cdot 0.62 = 0.609.
+  $$
 
-   With $NM = 0.61$:
+  With $NM = 0.61$:
    
-   ```math
-   p' = (1 - 0.609)\cdot 0.82 + 0.609 \cdot 0.61 = 0.694.
-   ```
+  $$
+  p' = (1 - 0.609)\cdot 0.82 + 0.609 \cdot 0.61 = 0.694.
+  $$
 
   Prediction is significantly moderated toward consensus.
 
@@ -677,19 +677,19 @@ We define two components:
 
 1.  **Adjusted probability uncertainty:**
 
-    $$
-    \big|\, p' - 0.5 \,\big| < p_{\min}
-    $$
+$$
+\big|\, p' - 0.5 \,\big| < p_{\min}
+$$
 
-    where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
+where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
 
 2.  **Fragility threshold:**
 
-    $$
-    FI > f_{\min}
-    $$
+$$
+FI > f_{\min}
+$$
 
-    where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
+where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
 
 The LLM is called **only if both conditions hold simultaneously**:
 
@@ -961,5 +961,6 @@ For reference, key notation used throughout this document:
 2. **Caching:** Pre-computed embeddings for training samples significantly reduce inference cost
 3. **Approximate neighbors:** Using approximate nearest neighbor methods (e.g., HNSW, IVF) provides 10-100× speedup with minimal accuracy loss
 4. **LLM cost control:** The gating mechanism ensures LLM calls remain below 15% of total samples, making deployment feasible
+
 
 ---
