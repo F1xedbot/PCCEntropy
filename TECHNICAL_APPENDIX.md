@@ -23,7 +23,8 @@ Patch Correctness Checking (PCC) aims to evaluate which candidate patches for a 
 
 Our framework leverages this insight by extracting **entropy-based features** from both the buggy code and the patched candidate. These features provide a quantitative measure of how "natural" each code snippet is according to the LM, and serve as inputs to a downstream model for patch correctness classification. Using the raw entropy features for both the buggy and patched code allows the model to learn how the patch affects naturalness, without explicitly computing a delta.
 
-![token_entropy](/assets/llm_token_entropy.png)
+<img src="/assets/llm_token_entropy.png" alt="token_entropy" width="500"/>
+
 *Figure 1: Token-level entropy in lm model*
 
 ---
@@ -113,17 +114,18 @@ To summarize the token-level information for a snippet, we compute **sequence-le
 
 1. **Sum Entropy:**
 
-$$
+```math
 \text{sum\_entropy}(C) = \sum_{i=1}^{n} H'(t_i) = \sum_{i=1}^{n} a_i \cdot H(t_i)
-$$
+```
 
 This captures the **total amount of surprisal** in the sequence. Longer sequences naturally accumulate higher sum entropy.
 
 2. **Mean Entropy:**
 
-$$
+```math
 \text{mean\_entropy}(C) = \frac{\sum_{i=1}^{n} H'(t_i)}{\sum_{i=1}^{n} a_i} = \frac{\sum_{i=1}^{n} a_i \cdot H(t_i)}{\sum_{i=1}^{n} a_i}
-$$
+```
+
 
 Mean entropy normalizes for sequence length, yielding a **per-token average measure** of naturalness. Both sum and mean entropy provide complementary information: sum captures absolute surprisal, while mean captures surprisal density per token.
 
@@ -246,7 +248,8 @@ where $y_i \in \{0,1\}$ is the true label. Lower values indicate better calibrat
 
 Figures 2 compare the **reliability diagrams** before and after Platt scaling. The recalibrated OOF probabilities adhere much more closely to the **diagonal line**, demonstrating improved reliability. This ensures that counterfactual comparisons among similar patches produce **trustworthy probability estimates**, improving both robustness and interpretability of the framework.
 
-![Calibration Before/After Platt Scaling](assets\calibration_curves_comparison.png)
+<img src="/assets/calibration_curves_comparison.png" alt="calibration_platt_scaling" width="500"/>
+
 *Figure 2: Reliability diagram before/after Platt scaling*
 
 ---
@@ -301,7 +304,7 @@ $$
 
 Because neighbor averaging reduces variance and corrects local bias, there always exists a weighting $\alpha$ such that the mean squared error of $p^\ast(x)$ is lower than that of $\hat{p}(x)$, provided neighbors are sufficiently similar. This demonstrates that the counterfactual correction can provably improve predictions under standard smoothness assumptions.
 
-![Correction with Neighbor Averaging](assets\illustrated_probability_plot.png)
+![Correction with Neighbor Averaging](assets/illustrated_probability_plot.png)
 *Figure 3: Illustrating Correction with Neighbor Averaging*
 
 ---
@@ -393,7 +396,7 @@ The model's **pseudo R² = 0.376** is unusually high for behavioral or predictio
 * **Pseudo R²:** `0.3760` (from table)
 * **LLR p-value:** `5.158e-91` (from table, rounded to 5.16e-91)
 
-![Logistic Regression SS Decile Test](assets\logistic_regression_ss_decile_test.png)
+![Logistic Regression SS Decile Test](assets/logistic_regression_ss_decile_test.png)
 
 *Figure 4: Logistic Regression Test Results on SS Decile*
 
@@ -474,7 +477,7 @@ In the joint model, both SS ($z = -15.3, p \ll 10^{-10}$) and CP ($z = -3.8, p <
 
 Performance metrics reinforced this. While SS remains the dominant factor for *ranking* predictions (SS-only AUC: 0.921 vs. SS+CP AUC: 0.916), the true value of CP was revealed in **model calibration**. Adding CP **improved the Brier score** (dropping from 0.058 to 0.056), indicating that it helped **refine the model's probability estimates** to be more reliable. This improvement in calibration is critical, as it provides a more accurate and trustworthy error probability for subsequent stages.
 
-![Logistic Regression on Joint Model](assets\logistic_regression_ss_cp_decile_test.png)
+![Logistic Regression on Joint Model](assets/logistic_regression_ss_cp_decile_test.png)
 
 *Figure 7: Logistic Regression Test Results on SS and CP Joint Model*
 
@@ -658,25 +661,25 @@ We define two components:
 
 1. **Adjusted probability uncertainty:**
 
-   $$
+   ```math
    \big|\, p' - 0.5 \,\big| < p_{\min}
-   $$
+   ```
 
    where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
 
 2. **Fragility threshold:**
 
-   $$
+   ```math
    FI > f_{\min}
-   $$
+   ```
 
    where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
 
 The LLM is called **only if both conditions hold simultaneously**:
 
-$$
+```math
 \text{Uncertainty}(x) \;=\; \Big(\, \big|\,p' - 0.5 \,\big| < p_{\min}\,\Big) \;\wedge\; \Big(\, FI > f_{\min}\,\Big).
-$$
+```
 
 ---
 
