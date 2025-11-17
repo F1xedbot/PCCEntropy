@@ -568,7 +568,7 @@ This adjustment rule operationalizes the safeguard principle in an enriched form
 1. **Dual grounding.** FI now reflects both SS (instability) and CP (counterfactual closeness), ensuring fragility captures multiple pathways to error.
 2. **Hyperparameter tuning.** $\alpha$ can be optimized to balance error correction against regression risk, based on observed trade-offs.
 3. **Error control.** In fragile regions, consensus reduces error by exploiting local smoothness in the embedding space.
-4. 4. **Trust preservation.** In stable regions, the adjustment is negligible, preserving model autonomy.
+4. **Trust preservation.** In stable regions, the adjustment is negligible, preserving model autonomy.
 5. **Bounded moderation.** $p'$ cannot overshoot; it remains a convex combination of $p$ and $NM(x)$.
 
 ---
@@ -962,5 +962,6 @@ For reference, key notation used throughout this document:
 
 
 ---
+
 
 
