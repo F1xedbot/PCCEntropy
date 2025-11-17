@@ -4,7 +4,7 @@ This leads to a bottleneck where developers must manually review numerous low-qu
 
 This repository explores a case study on a lightweight, multi-layered approach for code patch validation.
 The framework combines simple entropy analysis from a language model with statistical methods to predict patch correctness efficiently.
-On a held-out test set of 1,988 samples, the framework consistently achieves **98.8%** ROC-AUC, with potential peaks up to **99.8%** when the final LLM layer performs optimally.
+On a held-out test set of 1,988 samples, the framework consistently achieves **98.8%** ROC-AUC, with potential peaks up to **99.1%** when the final LLM layer performs optimally.
 The LLM component introduces some variability, but overall results remain stable and competitive compared to more complex empirical methods.
 
 ---
@@ -71,7 +71,7 @@ Uses a large language model to perform a final semantic check on the patch, impr
 Evaluation shows that integrating structured reliability metrics with a targeted LLM review layer significantly boosts precision and calibration — without depending fully on LLM-based evaluation.
 
 With **1,988 test samples**, the system achieved a **fixed ROC-AUC of 0.988 (98.8%)**, verified on held-out data.
-While the LLM layer can occasionally push the ROC-AUC up to **99.8%**, this improvement is not guaranteed due to the model’s non-deterministic behavior.
+While the LLM layer can occasionally push the ROC-AUC up to **99.1%**, this improvement is not guaranteed due to the model’s non-deterministic behavior.
 Nonetheless, the pipeline remains stably accurate at 98.8%.
 
 | Layer | Description                | ROC-AUC   | Notes                                                               |
@@ -129,5 +129,6 @@ The ideas and methods in this project build on existing work in automated progra
 7. Stone, C.J. (1977). *Consistent nonparametric regression.* Ann. Stat., 595–620.
 
 ---
+
 
 
