@@ -9,6 +9,34 @@ The LLM component introduces some variability, but overall results remain stable
 
 ---
 
+## Example: The Challenge of Ineffectual Patches
+
+A key challenge for automated repair is the generation of "plausible" patches that are syntactically valid but have no *semantic effect* (Label 0). These "no-op" patches are a common source of noise that wastes developer time.
+
+For instance, consider this patch intended to fix a caching issue in Hive:
+
+**The Bug:** The original code clears `mapJoinTables` *every time* `closeOp` is called, breaking a cache for operations that aren't "input file change sensitive."
+
+**The (Ineffectual) Patch:** The patch attempts to add a check, but its logic is flawed.
+
+```diff
+     @Override
+     public void closeOp(boolean abort) throws HiveException {
+-    if (mapJoinTables != null) {
++    if ((this.getExecContext().getLocalWork() != null
++        && this.getExecContext().getLocalWork().getInputFileChangeSensitive())
++        && mapJoinTables != null) {
+       for (MapJoinTableContainer tableContainer : mapJoinTables) {
+         if (tableContainer != null) {
+           tableContainer.clear();
+```
+
+**Label: 0 (No Effect)**
+
+This patch compiles but is **redundant**, as the condition `mapJoinTables != null` *already* implies the new checks are true. The program's behavior is unchanged.
+
+This framework is designed to **automatically detect and filter** these kinds of low-quality, ineffectual suggestions, saving reviewers from this manual and tedious analysis.
+
 ## Framework Overview
 
 This project implements a three-layer framework that combines lightweight statistical models with LLM-based validation.
