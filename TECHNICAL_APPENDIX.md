@@ -675,19 +675,19 @@ We define two components:
 
 1.  **Adjusted probability uncertainty:**
 
-    $$
-    \big| p' - 0.5 \big| < p_{\min}
-    $$
+$$
+\big| p' - 0.5 \big| < p_{\min}
+$$
 
-    where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
+where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
 
 2.  **Fragility threshold:**
+   
+$$
+FI > f_{\min}
+$$
 
-    $$
-    FI > f_{\min}
-    $$
-
-    where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
+where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
 
 The LLM is called **only if both conditions hold simultaneously**:
 
@@ -962,4 +962,5 @@ For reference, key notation used throughout this document:
 
 
 ---
+
 
