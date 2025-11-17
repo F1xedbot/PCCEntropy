@@ -70,4 +70,30 @@ PCCEntropy/
 └── TECHNICAL_APPENDIX.md  # Detailed definitions and mathematical derivations
 ```
 
+---
 
+## Further Resources
+
+For a detailed breakdown of the framework — from conceptual design to full mathematical definitions and proofs — see **[TECHNICAL_APPENDIX.md](./TECHNICAL_APPENDIX.md)**.
+
+To review the original analysis, and chart generation steps, explore the Jupyter notebooks in the **[`/notebooks/`](./notebooks/)** folder.
+
+If you’d like to run this project yourself, check out **[USAGE.md](./USAGE.md)** for setup instructions and local execution details.
+
+Credit is appreciated but not required — contributions and improvements are always welcome.
+Have fun experimenting!
+
+---
+
+## References
+The ideas and methods in this project build on existing work in automated program repair, language model analysis, and reliability-aware machine learning. Key references include:
+
+1. Smith, E.K., Barr, E.T., Le Goues, C., Brun, Y. (2015). *Is the cure worse than the disease? Overfitting in automated program repair.* ESEC/FSE 2015. [DOI](https://doi.org/10.1145/2786805.2786825)
+2. Wang, S., et al. (2021). *Automated patch correctness assessment: How far are we?* ASE ’20. [DOI](https://doi.org/10.1145/3324884.3416590)
+3. Zhang, Q., et al. (2024). *APPT: Boosting Automated Patch Correctness Prediction via Fine-tuning Pre-trained Models.* [arXiv](https://arxiv.org/abs/2301.12453)
+4. Tian, H., et al. (2022). *Predicting Patch Correctness Based on the Similarity of Failing Test Cases.* ACM Trans. Softw. Eng. Methodol., 31(4). [DOI](https://doi.org/10.1145/3511096)
+5. Wilks, S.S. (1938). *The large-sample distribution of the likelihood ratio for testing composite hypotheses.* Ann. Math. Stat., 9(1), 60–62.
+6. Cover, T., Hart, P. (1967). *Nearest neighbor pattern classification.* IEEE Trans. Inf. Theory, 13(1), 21–27.
+7. Stone, C.J. (1977). *Consistent nonparametric regression.* Ann. Stat., 595–620.
+
+---
