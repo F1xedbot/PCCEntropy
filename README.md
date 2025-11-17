@@ -43,6 +43,7 @@ Each layer serves a specific purpose in balancing accuracy, stability, and compu
 <p align="center">
   <img src="/assets/pcc_entropy_pipeline.png" alt="framework_pipeline"/>
   <br>
+  <em>Figure 1: Pipeline Architecture</em>
 </p>
 
 ### **Layer 1: Fast Triage (GBDT Classifier)**
