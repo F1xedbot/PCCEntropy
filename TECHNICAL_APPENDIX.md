@@ -23,9 +23,11 @@ Patch Correctness Checking (PCC) aims to evaluate which candidate patches for a 
 
 Our framework leverages this insight by extracting **entropy-based features** from both the buggy code and the patched candidate. These features provide a quantitative measure of how "natural" each code snippet is according to the LM, and serve as inputs to a downstream model for patch correctness classification. Using the raw entropy features for both the buggy and patched code allows the model to learn how the patch affects naturalness, without explicitly computing a delta.
 
-<img src="/assets/llm_token_entropy.png" alt="token_entropy" width="500"/>
-
-*Figure 1: Token-level entropy in lm model*
+<p align="center">
+  <img src="/assets/llm_token_entropy.png" alt="token_entropy" width="500"/>
+  <br>
+  <em>Figure 1: Token-level entropy in lm model</em>
+</p>
 
 ---
 
@@ -248,9 +250,11 @@ where $y_i \in \{0,1\}$ is the true label. Lower values indicate better calibrat
 
 Figures 2 compare the **reliability diagrams** before and after Platt scaling. The recalibrated OOF probabilities adhere much more closely to the **diagonal line**, demonstrating improved reliability. This ensures that counterfactual comparisons among similar patches produce **trustworthy probability estimates**, improving both robustness and interpretability of the framework.
 
-<img src="/assets/calibration_curves_comparison.png" alt="calibration_platt_scaling" width="500"/>
-
-*Figure 2: Reliability diagram before/after Platt scaling*
+<p align="center">
+  <img src="/assets/calibration_curves_comparison.png" alt="calibration_platt" width="500"/>
+  <br>
+  <em>Figure 2: Reliability diagram before/after Platt scaling</em>
+</p>
 
 ---
 
@@ -304,8 +308,11 @@ $$
 
 Because neighbor averaging reduces variance and corrects local bias, there always exists a weighting $\alpha$ such that the mean squared error of $p^\ast(x)$ is lower than that of $\hat{p}(x)$, provided neighbors are sufficiently similar. This demonstrates that the counterfactual correction can provably improve predictions under standard smoothness assumptions.
 
-![Correction with Neighbor Averaging](assets/illustrated_probability_plot.png)
-*Figure 3: Illustrating Correction with Neighbor Averaging*
+<p align="center">
+  <img src="/assets/illustrated_probability_plot.png" alt="correction_illustration" width="500"/>
+  <br>
+  <em>Figure 3: Illustrating Correction with Neighbor Averaging</em>
+</p>
 
 ---
 
@@ -396,9 +403,11 @@ The model's **pseudo R² = 0.376** is unusually high for behavioral or predictio
 * **Pseudo R²:** `0.3760` (from table)
 * **LLR p-value:** `5.158e-91` (from table, rounded to 5.16e-91)
 
-![Logistic Regression SS Decile Test](assets/logistic_regression_ss_decile_test.png)
-
-*Figure 4: Logistic Regression Test Results on SS Decile*
+<p align="center">
+  <img src="/assets/logistic_regression_ss_decile_test.png" alt="logistic_regression_ss_decile" width="500"/>
+  <br>
+  <em>Figure 4: Logistic Regression Test Results on SS Decile</em>
+</p>
 
 The model's **pseudo R² = 0.38** is unusually high for behavioral or prediction tasks of this type, indicating that SS alone explains a substantial portion of the variance in prediction error. The log-likelihood ratio test confirmed that including SS deciles greatly improved model fit compared to the null (intercept-only) model (LLR p ≈ 6 × 10⁻⁹²).
 
@@ -406,8 +415,11 @@ We also observed a quasi-separation phenomenon: in the upper deciles of SS (e.g.
 
 Taken together, the descriptive trend (error decreasing monotonically with SS) and the inferential test (highly significant negative slope) provide **clear evidence that SS is a monotonic and reliable confidence signal**. This monotonicity is crucial, since it justifies the use of SS as a calibration resource (e.g., in selective prediction or conformal frameworks).
 
-![Stability Score vs Error Rate](/assets/monotonicity_of_ss_vs_error.png)
-*Figure 5: Error rate by Stability Score decile showing strong monotonic decrease. Higher SS values consistently predict lower error rates, with upper deciles approaching zero error.*
+<p align="center">
+  <img src="/assets/monotonicity_of_ss_vs_error.png" alt="ss_vs_error_rate" width="500"/>
+  <br>
+  <em>Figure 5: Error rate by Stability Score decile showing strong monotonic decrease. Higher SS values consistently predict lower error rates, with upper deciles approaching zero error.</em>
+</p>
 
 ---
 
@@ -466,8 +478,11 @@ Counter-intuitively, in the **lowest SS deciles** (where instability was highest
 
 This suggests **SS and CP are not redundant**. SS acts as a broad filter for instability, while CP provides a different, more subtle signal that excels at identifying the few "surprise" errors remaining in an already-stable group. While this stratified view is insightful, a joint model is needed to test CP's holistic contribution.
 
-![CP AUC within SS](/assets/cp_auc_within_ss_decile.png)
-*Figure 6: CP AUC within SS deciles.*
+<p align="center">
+  <img src="/assets/cp_auc_within_ss_decile.png" alt="cp_auc_within_ss" width="500"/>
+  <br>
+  <em>Figure 6: CP AUC within SS deciles.</em>
+</p>
 
 ##### (b) Logistic Regression Comparison
 
@@ -477,10 +492,11 @@ In the joint model, both SS ($z = -15.3, p \ll 10^{-10}$) and CP ($z = -3.8, p <
 
 Performance metrics reinforced this. While SS remains the dominant factor for *ranking* predictions (SS-only AUC: 0.921 vs. SS+CP AUC: 0.916), the true value of CP was revealed in **model calibration**. Adding CP **improved the Brier score** (dropping from 0.058 to 0.056), indicating that it helped **refine the model's probability estimates** to be more reliable. This improvement in calibration is critical, as it provides a more accurate and trustworthy error probability for subsequent stages.
 
-![Logistic Regression on Joint Model](assets/logistic_regression_ss_cp_decile_test.png)
-
-*Figure 7: Logistic Regression Test Results on SS and CP Joint Model*
-
+<p align="center">
+  <img src="/assets/logistic_regression_ss_cp_decile_test.png" alt="logistic_regression_joint_model" width="500"/>
+  <br>
+  <em>Figure 7: Logistic Regression Test Results on SS and CP Joint Model</em>
+</p>
 
 ---
 
@@ -721,12 +737,17 @@ The trained GBDT model achieves strong performance on the test set, with an **ov
 * **Class 0 (incorrect patches):** precision 0.91, recall 0.94, F1-score 0.93
 * **Class 1 (correct patches):** precision 0.93, recall 0.90, F1-score 0.92
 
-![Confusion Matrix](assets/cm_base.png)
-*Figure 8: Confusion matrix for the base GBDT model showing balanced performance across both classes with 92% overall accuracy.*
+<p align="center">
+  <img src="/assets/cm_base.png" alt="cm_base" width="500"/>
+  <br>
+  <em>Figure 8: Confusion matrix for the base GBDT model showing balanced performance across both classes with 92% overall accuracy.</em>
+</p>
 
-![ROC Curve](assets/roc_curve_base_model.png)
-*Figure 9: ROC curve demonstrating excellent discriminative power with AUC = 0.97, indicating the model effectively separates correct from incorrect patches.*
-
+<p align="center">
+  <img src="/assets/roc_curve_base_model.png" alt="roc_curve_base_model" width="500"/>
+  <br>
+  <em>Figure 9: ROC curve demonstrating excellent discriminative power with AUC = 0.97, indicating the model effectively separates correct from incorrect patches.</em>
+</p>
 ---
 
 ### 5.2 Feature Importance Analysis
@@ -740,8 +761,11 @@ From the chart, we observe that:
 
 Overall, the chart supports the conclusion that **entropy-derived features capture meaningful signals** for patch correctness and that the model effectively integrates these signals to achieve high predictive performance.
 
-![Feature Importance](assets/entropy_feature_correlation.png)
-*Figure 10: Feature importance analysis showing that sum entropy and token counts dominate predictions, with buggy snippet features slightly more influential than patched features.*
+<p align="center">
+  <img src="/assets/entropy_feature_correlation.png" alt="entropy_correlation" width="500"/>
+  <br>
+  <em>Figure 10: Feature importance analysis showing that sum entropy and token counts dominate predictions, with buggy snippet features slightly more influential than patched features.</em>
+</p>
 
 ---
 
@@ -784,11 +808,17 @@ This comparison demonstrates that while SS alone is a strong driver of correctio
 
 **Takeaway.** The counterfactual adjustment engine is effective in reducing model errors while preserving calibration. CP, while secondary to SS, acts as an important stabilizer that prevents regressions from outpacing corrections.
 
-![Adjustment Performance Comparison](/assets/before_and_after_selective_adjustment_comparison.png)
-*Figure 11: Performance comparison before and after selective adjustment*
+<p align="center">
+  <img src="/assets/before_and_after_selective_adjustment_comparison.png" alt="performance_comparision" width="500"/>
+  <br>
+  <em>Figure 11: Performance comparison before and after selective adjustment</em>
+</p>
 
-![Error Reduction Analysis](/assets/error_reduction_with_alpha.png)
-*Figure 12: Breakdown of errors corrected vs. regressions introduced, demonstrating that α = 0.6 provides the best trade-off with 29% net error reduction.*
+<p align="center">
+  <img src="/assets/error_reduction_with_alpha.png" alt="error_reduction" width="500"/>
+  <br>
+  <em>Figure 12: Breakdown of errors corrected vs. regressions introduced, demonstrating that α = 0.6 provides the best trade-off with 29% net error reduction</em>
+</p>
 
 ---
 
