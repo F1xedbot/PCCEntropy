@@ -578,30 +578,30 @@ This adjustment rule operationalizes the safeguard principle in an enriched form
 * **Stable case:**
   If $p = 0.82$, $SS = 0.92$, $CP = 0.11$, $\alpha = 0.7$:
 
-  $$
+  ```math
   FI = 0.7 \cdot (1 - 0.92) + 0.3 \cdot 0.11 = 0.056.
-  $$
+  ```
 
   With $NM = 0.80$:
 
-  $$
+  ```math
   p' = (1 - 0.056)\cdot 0.82 + 0.056 \cdot 0.80 = 0.819.
-  $$
+  ```
 
   Adjustment is negligible—stability preserved.
 
 * **Fragile case:**
-  If $p = 0.82$, $SS = 0.35$, $CP = 0.62$, $\alpha = 0.7$:
+If $p = 0.82$, $SS = 0.35$, $CP = 0.62$, $\alpha = 0.7$:
 
-  $$
-  FI = 0.7 \cdot (1 - 0.35) + 0.3 \cdot 0.62 = 0.609.
-  $$
+   ```math
+   FI = 0.7 \cdot (1 - 0.35) + 0.3 \cdot 0.62 = 0.609.
+   ```
 
-  With $NM = 0.61$:
-
-  $$
-  p' = (1 - 0.609)\cdot 0.82 + 0.609 \cdot 0.61 = 0.694.
-  $$
+   With $NM = 0.61$:
+   
+   ```math
+   p' = (1 - 0.609)\cdot 0.82 + 0.609 \cdot 0.61 = 0.694.
+   ```
 
   Prediction is significantly moderated toward consensus.
 
@@ -675,27 +675,27 @@ Because our framework already produces **counterfactual neighbors**, these can s
 
 We define two components:
 
-1. **Adjusted probability uncertainty:**
+1.  **Adjusted probability uncertainty:**
 
-   ```math
-   \big|\, p' - 0.5 \,\big| < p_{\min}
-   ```
+    $$
+    \big|\, p' - 0.5 \,\big| < p_{\min}
+    $$
 
-   where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
+    where $p'$ is the adjusted probability, and $p_{\min}$ is a minimum confidence margin.
 
-2. **Fragility threshold:**
+2.  **Fragility threshold:**
 
-   ```math
-   FI > f_{\min}
-   ```
+    $$
+    FI > f_{\min}
+    $$
 
-   where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
+    where $FI$ represents fragility, and $f_{\min}$ is the minimum fragility required to consider the prediction unstable.
 
 The LLM is called **only if both conditions hold simultaneously**:
 
-```math
+$$
 \text{Uncertainty}(x) \;=\; \Big(\, \big|\,p' - 0.5 \,\big| < p_{\min}\,\Big) \;\wedge\; \Big(\, FI > f_{\min}\,\Big).
-```
+$$
 
 ---
 
@@ -748,6 +748,7 @@ The trained GBDT model achieves strong performance on the test set, with an **ov
   <br>
   <em>Figure 9: ROC curve demonstrating excellent discriminative power with AUC = 0.97, indicating the model effectively separates correct from incorrect patches.</em>
 </p>
+
 ---
 
 ### 5.2 Feature Importance Analysis
