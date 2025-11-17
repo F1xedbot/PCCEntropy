@@ -40,6 +40,11 @@ This framework is designed to **automatically detect and filter** these kinds of
 This project implements a three-layer framework that combines lightweight statistical models with LLM-based validation.
 Each layer serves a specific purpose in balancing accuracy, stability, and computational cost.
 
+<p align="center">
+  <img src="/assets/pcc_entropy_pipeline.png" alt="framework_pipeline"/>
+  <br>
+</p>
+
 ### **Layer 1: Fast Triage (GBDT Classifier)**
 
 A Gradient Boosting model trained on code naturalness features derived from token-level cross-entropy between buggy and patched code using **StarCoder 3B**.
