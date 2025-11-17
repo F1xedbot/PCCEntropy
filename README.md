@@ -31,8 +31,6 @@ For instance, consider this patch intended to fix a caching issue in Hive:
            tableContainer.clear();
 ```
 
-**Label: 0 (No Effect)**
-
 This patch compiles but is **redundant**, as the condition `mapJoinTables != null` *already* implies the new checks are true. The program's behavior is unchanged.
 
 This framework is designed to **automatically detect and filter** these kinds of low-quality, ineffectual suggestions, saving reviewers from this manual and tedious analysis.
@@ -125,4 +123,5 @@ The ideas and methods in this project build on existing work in automated progra
 7. Stone, C.J. (1977). *Consistent nonparametric regression.* Ann. Stat., 595–620.
 
 ---
+
 
