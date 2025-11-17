@@ -11,7 +11,7 @@ The LLM component introduces some variability, but overall results remain stable
 
 ## Example: The Challenge of Ineffectual Patches
 
-A key challenge for automated repair is the generation of "plausible" patches that are syntactically valid but have no *semantic effect* (Label 0). These "no-op" patches are a common source of noise that wastes developer time.
+A key challenge for automated repair is the generation of "plausible" patches that are syntactically valid but have no *semantic effect*. These "no-op" patches are a common source of noise that wastes developer time.
 
 For instance, consider this patch intended to fix a caching issue in Hive:
 
@@ -125,3 +125,4 @@ The ideas and methods in this project build on existing work in automated progra
 7. Stone, C.J. (1977). *Consistent nonparametric regression.* Ann. Stat., 595–620.
 
 ---
+
